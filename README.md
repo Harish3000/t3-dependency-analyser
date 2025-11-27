@@ -4,7 +4,7 @@ Models dependency chains between Tickets and Services. It identifies the cascade
 
 ### Algorithm 
 
-The system parses YAML input into two indexes to enable O(1) lookups:
+Parse YAML input into two indexes to enable O(1) lookups:
 
 1.  **Forward Index:** `Ticket` to `[Services]`
 2.  **Inverted Index:** `Service` to `[Tickets]`
@@ -33,8 +33,8 @@ Let N be the number of Tickets.
 
 **1. Clone Repository**
 ```bash
-git clone <repository-url>
-cd ticket-dependency-analyzer-v2
+git clone https://github.com/Harish3000/t3-dependency-analyser.git
+cd t3-dependency-analyser
 ```
 
 **2. Start Backend**
