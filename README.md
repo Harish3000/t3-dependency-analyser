@@ -1,6 +1,6 @@
 # 🎲Ticket-tac-toe Dependency Analyzer
 
-This tool models dependency chains between Tickets and Services. It identifies the cascade effect of removing a specific ticket.
+Models dependency chains between Tickets and Services. It identifies the cascade effect of removing a specific ticket.
 
 ### Algorithm 
 
