@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket-tack-toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket-tack-toe Dependency Analyzer</h1>
+        
+        <div class="input-section">
+            <h2>1. Enter System Structure (YAML)</h2>
+            <textarea id="yaml-input" rows="15" placeholder="Paste your YAML structure here..."></textarea>
+            <button onclick="submitStructure()">Load System Structure</button>
+        </div>
+
+        <div class="analysis-section">
+            <h2>2. Analyze Ticket Removal</h2>
+            <input type="text" id="ticket-to-remove" placeholder="Enter Ticket ID to remove (e.g., TICKET-101)">
+            <button onclick="analyzeRemoval()">Analyze Dependencies</button>
+        </div>
+
+        <div class="results-section">
+            <h2>3.Results</h2>
+            <pre id="results-output"></pre>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+
+        async function submitStructure() {
+            const yamlInput = document.getElementById('yaml-input').value;
+            const resultsOutput = document.getElementById('results-output');
+            try {
+                const response = await fetch(`${API_URL}/structure`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ yaml: yamlInput }),
+                });
+                const result = await response.json();
+                resultsOutput.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                resultsOutput.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        async function analyzeRemoval() {
+            const ticketIdToRemove = document.getElementById('ticket-to-remove').value;
+            const resultsOutput = document.getElementById('results-output');
+             if (!ticketIdToRemove) {
+                resultsOutput.textContent = 'Please enter a ticket ID to remove.';
+                return;
+            }
+            try {
+                const response = await fetch(`${API_URL}/remove-ticket`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ticketIdToRemove }),
+                });
+                const result = await response.json();
+                resultsOutput.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                resultsOutput.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
