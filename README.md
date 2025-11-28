@@ -1,10 +1,10 @@
 # 🎲Ticket-tac-toe Dependency Analyzer
 
-Models dependency chains between Tickets and Services. It identifies the cascade effect of removing a specific ticket.
+This models dependency chains between Tickets and Services. It identifies the cascade effect of removing a specific ticket.
 
 ### Algorithm 
 
-Parse YAML input into two indexes to enable O(1) lookups:
+It builds two indexes of the system structure from the YAML input and runs an **index-based DFS algorithm** to find all dependencies.
 
 1.  **Forward Index:** `Ticket` to `[Services]`
 2.  **Inverted Index:** `Service` to `[Tickets]`
